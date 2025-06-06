@@ -2460,24 +2460,16 @@ class CastChartPage(QWidget):
         return section
 
     def create_house_section(self) -> QWidget:
-        """Create the house assignment section"""
-        section = QGroupBox("")
-        section.setFont(QFont("Roboto", 14, QFont.Bold))
+        """Create the house assignment section without a visible label"""
+        section = QFrame()
         section.setStyleSheet(
             """
-            QGroupBox {
+            QFrame {
                 border: 2px solid #e0e0e0;
                 border-radius: 10px;
                 margin-top: 15px;
                 padding-top: 15px;
-                font-weight: bold;
                 background-color: #fafafa;
-            }
-            QGroupBox::title {
-                subcontrol-origin: margin;
-                left: 15px;
-                padding: 0 10px 0 10px;
-                background-color: white;
             }
             """
         )
