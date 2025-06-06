@@ -2044,6 +2044,7 @@ class CastChartPage(QWidget):
 
         label = QLabel(label_text)
         label.setFont(QFont("Roboto", 14, QFont.Normal))
+        label.setStyleSheet("color: #007fff;")
         
         layout.addWidget(label)
         layout.addWidget(field_widget)
@@ -2140,6 +2141,7 @@ class CastChartPage(QWidget):
         main_layout = QVBoxLayout(self)
         main_layout.setContentsMargins(0, 0, 0, 0)
         main_layout.setSpacing(0)
+        self.setStyleSheet("background-color: #f9fafb;")
 
         scroll_area = QScrollArea()
         scroll_area.setWidgetResizable(True)
@@ -2180,8 +2182,8 @@ class CastChartPage(QWidget):
             """
             QWidget {
                 background-color: white;
-                border: 2px solid #e0e0e0;
-                border-radius: 15px;
+                border: 1px solid #e0e0e0;
+                border-radius: 12px;
                 padding: 40px;
             }
             """
@@ -2244,8 +2246,8 @@ class CastChartPage(QWidget):
         self.submit_button.setStyleSheet(
             """
             QPushButton {
-                background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
-                    stop:0 #4CAF50, stop:1 #45a049);
+                background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                    stop:0 #14b8a6, stop:1 #c084fc);
                 color: white;
                 border: none;
                 padding: 15px 30px;
@@ -2256,8 +2258,8 @@ class CastChartPage(QWidget):
                 min-height: 40px;
             }
             QPushButton:hover {
-                background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
-                    stop:0 #45a049, stop:1 #3d8b40);
+                background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                    stop:0 #17c3b2, stop:1 #d0a3ff);
                 transform: translateY(-2px);
             }
             QPushButton:disabled {
@@ -2308,6 +2310,7 @@ class CastChartPage(QWidget):
                 left: 15px;
                 padding: 0 10px 0 10px;
                 background-color: white;
+                color: #007fff;
             }
             """
         )
@@ -2331,6 +2334,10 @@ class CastChartPage(QWidget):
                 font-family: Roboto;
                 background-color: white;
                 line-height: 1.4;
+            }
+            QTextEdit::placeholder {
+                color: #6b7280;
+                font-size: 13px;
             }
             QTextEdit:focus {
                 border-color: #4CAF50;
@@ -2362,6 +2369,7 @@ class CastChartPage(QWidget):
                 left: 15px;
                 padding: 0 10px 0 10px;
                 background-color: white;
+                color: #007fff;
             }
             """
         )
@@ -2383,6 +2391,10 @@ class CastChartPage(QWidget):
                 background-color: white;
                 min-height: 20px;
             }
+            QLineEdit::placeholder {
+                color: #6b7280;
+                font-size: 13px;
+            }
             QLineEdit:focus {
                 border-color: #4CAF50;
                 background-color: #f9fff9;
@@ -2391,7 +2403,7 @@ class CastChartPage(QWidget):
         )
 
         self.location_status = QLabel()
-        self.location_status.setStyleSheet("font-size: 12px; color: #666; margin-top: 8px;")
+        self.location_status.setStyleSheet("font-size: 13px; color: #6b7280; margin-top: 8px;")
 
         location_btn = QPushButton("Use My Location")
         location_btn.setAccessibleName("Use my location")
@@ -2422,6 +2434,7 @@ class CastChartPage(QWidget):
                 left: 15px;
                 padding: 0 10px 0 10px;
                 background-color: white;
+                color: #007fff;
             }
             """
         )
@@ -2435,10 +2448,12 @@ class CastChartPage(QWidget):
         self.current_time_radio = QRadioButton("Use current time (moment of asking)")
         self.current_time_radio.setChecked(True)
         self.current_time_radio.setFont(QFont("Roboto", 13))
+        self.current_time_radio.setStyleSheet("color: #007fff;")
         self.time_button_group.addButton(self.current_time_radio)
 
         self.custom_time_radio = QRadioButton("Specify custom time")
         self.custom_time_radio.setFont(QFont("Roboto", 13))
+        self.custom_time_radio.setStyleSheet("color: #007fff;")
         self.time_button_group.addButton(self.custom_time_radio)
 
         self.datetime_edit = QDateTimeEdit()
@@ -2492,6 +2507,7 @@ class CastChartPage(QWidget):
                 left: 15px;
                 padding: 0 10px 0 10px;
                 background-color: white;
+                color: #007fff;
             }
             """
         )
@@ -2505,10 +2521,12 @@ class CastChartPage(QWidget):
         self.auto_house_radio = QRadioButton("Automatic (AI analyzes question)")
         self.auto_house_radio.setChecked(True)
         self.auto_house_radio.setFont(QFont("Roboto", 12))
+        self.auto_house_radio.setStyleSheet("color: #007fff;")
         self.house_button_group.addButton(self.auto_house_radio)
 
         self.manual_house_radio = QRadioButton("Manual house selection")
         self.manual_house_radio.setFont(QFont("Roboto", 12))
+        self.manual_house_radio.setStyleSheet("color: #007fff;")
         self.house_button_group.addButton(self.manual_house_radio)
 
         self.house_combo = QComboBox()
