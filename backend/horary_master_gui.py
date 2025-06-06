@@ -30,17 +30,17 @@ from typing import Dict, List, Optional, Any, Tuple
 import requests
 
 from PySide6.QtWidgets import (
-    QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, 
+    QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
     QGridLayout, QFormLayout, QStackedWidget, QToolBar, QStatusBar,
     QPushButton, QLabel, QTextEdit, QLineEdit, QComboBox, QDateTimeEdit,
     QRadioButton, QButtonGroup, QFrame, QScrollArea, QTabWidget,
-    QTableWidget, QTableWidgetItem, QProgressBar, QListWidget, 
+    QTableWidget, QTableWidgetItem, QProgressBar, QListWidget,
     QListWidgetItem, QMessageBox, QDialog, QDialogButtonBox,
     QTextBrowser, QGroupBox, QCheckBox, QSpinBox, QSlider,
     QSplitter, QHeaderView, QAbstractItemView, QTreeWidget, QTreeWidgetItem,
     QCalendarWidget, QPlainTextEdit, QFileDialog, QInputDialog,
     QStyledItemDelegate, QStyleOptionViewItem, QPushButton as QBtn,
-    QSizePolicy, QLayout
+    QSizePolicy, QLayout, QToolButton
 )
 from PySide6.QtCore import (
     Qt, QTimer, QThread, QObject, Signal, QSize, QRect,
@@ -1833,13 +1833,14 @@ class DashboardPage(QWidget):
 
 
 class CollapsibleSection(QWidget):
-    """A simple collapsible container with a checkbox header."""
+    """Collapsible container with a toggle button header."""
 
     def __init__(self, title: str, parent: Optional[QWidget] = None):
         super().__init__(parent)
-        self._toggle = QCheckBox(title)
-        self._toggle.setChecked(False)
-        self._toggle.setStyleSheet("font-weight: bold; margin-bottom:4px;")
+        self._toggle = QToolButton(text=title, checkable=True, checked=False)
+        self._toggle.setStyleSheet("QToolButton { border: none; font-weight: bold; }")
+        self._toggle.setToolButtonStyle(Qt.ToolButtonTextBesideIcon)
+        self._toggle.setArrowType(Qt.RightArrow)
 
         self._content = QWidget()
         self._content.setObjectName("content")
@@ -1869,11 +1870,13 @@ class CollapsibleSection(QWidget):
             pass
 
         if checked:
+            self._toggle.setArrowType(Qt.DownArrow)
             self._content.setVisible(True)
             start, end = 0, self._content.layout().sizeHint().height()
             self._content.setMaximumHeight(0)
             self._anim.finished.connect(lambda: self._content.setMaximumHeight(16777215))
         else:
+            self._toggle.setArrowType(Qt.RightArrow)
             start, end = self._content.height(), 0
             self._anim.finished.connect(lambda: self._content.setVisible(False))
 
@@ -2546,7 +2549,7 @@ class CastChartPage(QWidget):
         section = CollapsibleSection("Advanced Options")
         section.setStyleSheet(
             """
-            QCheckBox {
+            QToolButton {
                 font: bold 16px 'Arial';
                 margin-top: 15px;
                 padding-left: 5px;
