@@ -1315,9 +1315,12 @@ class TimelineView(QWidget):
         splitter.addWidget(left_widget)
         splitter.addWidget(right_widget)
         splitter.setSizes([300, 700])
-        
+        splitter.setStretchFactor(0, 1)
+        splitter.setStretchFactor(1, 2)
+
         layout.addWidget(splitter)
         self.setLayout(layout)
+
     
     def load_timeline_data(self):
         """Load timeline data from database"""
@@ -2225,7 +2228,7 @@ class CastChartPage(QWidget):
         form_layout.addWidget(self.progress_label)
 
         # Submit button - full width with better styling
-        self.submit_button = QPushButton("⚡ Cast Enhanced Horary Chart")
+        self.submit_button = QPushButton("⚡ Cast Chart")
         self.submit_button.setFixedWidth(260)
         self.submit_button.setStyleSheet(
             """
@@ -2655,7 +2658,7 @@ class CastChartPage(QWidget):
     def on_calculation_finished(self, result: dict):
         """Handle completed calculation"""
         self.submit_button.setEnabled(True)
-        self.submit_button.setText("⚡ Cast Enhanced Horary Chart")
+        self.submit_button.setText("⚡ Cast Chart")
         self.progress_label.hide()
 
         result["form_data"] = {
@@ -2672,7 +2675,7 @@ class CastChartPage(QWidget):
     def on_calculation_error(self, error: str):
         """Handle calculation error"""
         self.submit_button.setEnabled(True)
-        self.submit_button.setText("⚡ Cast Enhanced Horary Chart")
+        self.submit_button.setText("⚡ Cast Chart")
         self.progress_label.hide()
 
         logger.error(f"Chart calculation failed: {error}")
@@ -2744,10 +2747,17 @@ class ChartDetailPage(QWidget):
         
         # Set splitter proportions
         splitter.setSizes([450, 600])
+        splitter.setStretchFactor(0, 1)
+        splitter.setStretchFactor(1, 2)
         
         layout.addWidget(splitter)
         self.setLayout(layout)
-    
+
+    def resizeEvent(self, event):
+        super().resizeEvent(event)
+        self.chart_wheel.update()
+        self.tab_widget.updateGeometry()
+
     def create_chart_header(self) -> QWidget:
         """Create enhanced chart header"""
         header = QFrame()
