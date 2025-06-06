@@ -2136,11 +2136,22 @@ class CastChartPage(QWidget):
 
     def setup_ui(self):
         """Setup the cast chart form with full-width layout"""
-        # Main layout - use full width without centering
-        main_layout = QVBoxLayout()
-        main_layout.setContentsMargins(40, 30, 40, 30)
+        # Top level layout with scroll area so the form adapts to window size
+        main_layout = QVBoxLayout(self)
+        main_layout.setContentsMargins(0, 0, 0, 0)
+        main_layout.setSpacing(0)
+
+        scroll_area = QScrollArea()
+        scroll_area.setWidgetResizable(True)
+        main_layout.addWidget(scroll_area)
+
+        content_widget = QWidget()
+        scroll_area.setWidget(content_widget)
+
+        form_page_layout = QVBoxLayout(content_widget)
+        form_page_layout.setContentsMargins(40, 30, 40, 30)
         # Use tighter spacing for better vertical rhythm
-        main_layout.setSpacing(16)
+        form_page_layout.setSpacing(16)
 
         # Form title removed per UI simplification
 
@@ -2161,7 +2172,7 @@ class CastChartPage(QWidget):
                 """
             )
             status_label.setAlignment(Qt.AlignCenter)
-            main_layout.addWidget(status_label)
+            form_page_layout.addWidget(status_label)
 
         # Create form container that takes full width
         form_container = QWidget()
@@ -2272,9 +2283,9 @@ class CastChartPage(QWidget):
         self.setTabOrder(self.ignore_combustion_check, self.ignore_saturn_7th_check)
         self.setTabOrder(self.ignore_saturn_7th_check, self.submit_button)
 
-        # Add form container to main layout (no centering wrapper)
-        main_layout.addWidget(form_container)
-        main_layout.addStretch()
+        # Add form container to scrollable page layout
+        form_page_layout.addWidget(form_container)
+        form_page_layout.addStretch()
 
         self.setLayout(main_layout)
 
