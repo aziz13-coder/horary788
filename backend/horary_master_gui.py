@@ -30,17 +30,17 @@ from typing import Dict, List, Optional, Any, Tuple
 import requests
 
 from PySide6.QtWidgets import (
-    QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, 
+    QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
     QGridLayout, QFormLayout, QStackedWidget, QToolBar, QStatusBar,
     QPushButton, QLabel, QTextEdit, QLineEdit, QComboBox, QDateTimeEdit,
     QRadioButton, QButtonGroup, QFrame, QScrollArea, QTabWidget,
-    QTableWidget, QTableWidgetItem, QProgressBar, QListWidget, 
+    QTableWidget, QTableWidgetItem, QProgressBar, QListWidget,
     QListWidgetItem, QMessageBox, QDialog, QDialogButtonBox,
     QTextBrowser, QGroupBox, QCheckBox, QSpinBox, QSlider,
     QSplitter, QHeaderView, QAbstractItemView, QTreeWidget, QTreeWidgetItem,
     QCalendarWidget, QPlainTextEdit, QFileDialog, QInputDialog,
     QStyledItemDelegate, QStyleOptionViewItem, QPushButton as QBtn,
-    QSizePolicy, QLayout
+    QSizePolicy, QLayout, QToolButton
 )
 from PySide6.QtCore import (
     Qt, QTimer, QThread, QObject, Signal, QSize, QRect,
@@ -630,7 +630,7 @@ class AlertBanner(QFrame):
         # Icon
         icons = {"warning": "⚠️", "error": "❌", "info": "ℹ️", "success": "✅"}
         icon_label = QLabel(icons.get(alert_type, "ℹ️"))
-        icon_label.setFont(QFont("Arial", 14))
+        icon_label.setFont(QFont("Roboto", 14))
         
         # Message
         message_label = QLabel(message)
@@ -750,7 +750,7 @@ class StatsGrid(QWidget):
         
         # Value
         value_label = QLabel(value if value else "--")
-        value_label.setFont(QFont("Arial", 32, QFont.Bold))
+        value_label.setFont(QFont("Roboto", 32, QFont.Bold))
         value_label.setStyleSheet("""
             QLabel {
                 color: #2c3e50;
@@ -935,7 +935,7 @@ class ChartCard(QFrame):
         top_layout = QHBoxLayout()
         question = data.get('question', 'No Question Title')
         title_label = QLabel(question)
-        title_label.setFont(QFont("Arial", 12, QFont.Bold))
+        title_label.setFont(QFont("Roboto", 12, QFont.Bold))
         title_label.setWordWrap(True)
 
         judgment = data.get('judgment', 'UNKNOWN')
@@ -1037,7 +1037,7 @@ class ChartWheelCanvas(QWidget):
         painter.drawEllipse(center, radius, radius)
         
         painter.setPen(QPen(QColor("#999")))
-        painter.setFont(QFont("Arial", 12))
+        painter.setFont(QFont("Roboto", 12))
         painter.drawText(self.rect(), Qt.AlignCenter, "Chart Wheel\n(Awaiting Chart Data)")
     
     def draw_chart_wheel(self, painter: QPainter):
@@ -1103,7 +1103,7 @@ class ChartWheelCanvas(QWidget):
             text_y = center.y() + text_radius * math.sin(math.radians(text_angle))
             
             painter.setPen(QPen(QColor("#333"), 2))
-            painter.setFont(QFont("Arial", 16, QFont.Bold))
+            painter.setFont(QFont("Roboto", 16, QFont.Bold))
             painter.drawText(QRect(text_x-15, text_y-15, 30, 30), Qt.AlignCenter, glyph)
         
         # Draw outer and inner circles
@@ -1129,7 +1129,7 @@ class ChartWheelCanvas(QWidget):
             number_x = center.x() + number_radius * math.cos(math.radians(angle + 15))
             number_y = center.y() + number_radius * math.sin(math.radians(angle + 15))
             
-            painter.setFont(QFont("Arial", 10, QFont.Bold))
+            painter.setFont(QFont("Roboto", 10, QFont.Bold))
             painter.setPen(QPen(QColor("#333")))
             painter.drawText(QRect(number_x-10, number_y-10, 20, 20), Qt.AlignCenter, str(i+1))
     
@@ -1146,7 +1146,7 @@ class ChartWheelCanvas(QWidget):
             'Saturn': '#003566'
         }
         
-        painter.setFont(QFont("Arial", 14, QFont.Bold))
+        painter.setFont(QFont("Roboto", 14, QFont.Bold))
         
         for planet_name, planet_data in planets.items():
             if planet_name in planet_glyphs:
@@ -1171,12 +1171,12 @@ class ChartWheelCanvas(QWidget):
                 painter.drawText(QRect(planet_x-12, planet_y-12, 24, 24), Qt.AlignCenter, glyph)
                 
                 # Draw degree text
-                painter.setFont(QFont("Arial", 8))
+                painter.setFont(QFont("Roboto", 8))
                 degree_text = f"{longitude:.1f}°"
                 degree_x = center.x() + (radius + 25) * math.cos(math.radians(angle))
                 degree_y = center.y() + (radius + 25) * math.sin(math.radians(angle))
                 painter.drawText(QRect(degree_x-20, degree_y-10, 40, 20), Qt.AlignCenter, degree_text)
-                painter.setFont(QFont("Arial", 14, QFont.Bold))
+                painter.setFont(QFont("Roboto", 14, QFont.Bold))
     
     def draw_aspects(self, painter: QPainter, center, radius: int, aspects: List[Dict], planets: Dict[str, Any]):
         """Draw aspect lines between planets"""
@@ -1234,7 +1234,7 @@ class TimelineView(QWidget):
         header_layout = QHBoxLayout()
         
         title_label = QLabel("📈 Chart Timeline & Analysis")
-        title_label.setFont(QFont("Arial", 18, QFont.Bold))
+        title_label.setFont(QFont("Roboto", 18, QFont.Bold))
         
         # Date range selector
         date_layout = QHBoxLayout()
@@ -1302,7 +1302,7 @@ class TimelineView(QWidget):
         
         # Chart list for selected period
         charts_label = QLabel("Charts in Period")
-        charts_label.setFont(QFont("Arial", 14, QFont.Bold))
+        charts_label.setFont(QFont("Roboto", 14, QFont.Bold))
         right_layout.addWidget(charts_label)
         
         self.timeline_list = QListWidget()
@@ -1429,7 +1429,7 @@ class NotebookView(QWidget):
         # Header with new entry button
         header_layout = QHBoxLayout()
         title_label = QLabel("📝 Research Notebook")
-        title_label.setFont(QFont("Arial", 16, QFont.Bold))
+        title_label.setFont(QFont("Roboto", 16, QFont.Bold))
         
         new_btn = QPushButton("+ New Entry")
         new_btn.setStyleSheet("""
@@ -1478,7 +1478,7 @@ class NotebookView(QWidget):
         
         self.title_edit = QLineEdit()
         self.title_edit.setPlaceholderText("Entry Title...")
-        self.title_edit.setFont(QFont("Arial", 14, QFont.Bold))
+        self.title_edit.setFont(QFont("Roboto", 14, QFont.Bold))
         self.title_edit.textChanged.connect(self.mark_modified)
         
         self.save_btn = QPushButton("💾 Save")
@@ -1728,7 +1728,7 @@ class DashboardPage(QWidget):
         # 5. Recent Charts Section (Header + Controls)
         recent_charts_header_layout = QHBoxLayout()
         recent_label = QLabel("Recent Charts")
-        recent_label.setFont(QFont("Arial", 18, QFont.Bold))
+        recent_label.setFont(QFont("Roboto", 18, QFont.Bold))
         recent_charts_header_layout.addWidget(recent_label)
         recent_charts_header_layout.addStretch()
 
@@ -1833,13 +1833,14 @@ class DashboardPage(QWidget):
 
 
 class CollapsibleSection(QWidget):
-    """A simple collapsible container with a checkbox header."""
+    """Collapsible container with a toggle button header."""
 
     def __init__(self, title: str, parent: Optional[QWidget] = None):
         super().__init__(parent)
-        self._toggle = QCheckBox(title)
-        self._toggle.setChecked(False)
-        self._toggle.setStyleSheet("font-weight: bold; margin-bottom:4px;")
+        self._toggle = QToolButton(text=title, checkable=True, checked=False)
+        self._toggle.setStyleSheet("QToolButton { border: none; font-weight: bold; }")
+        self._toggle.setToolButtonStyle(Qt.ToolButtonTextBesideIcon)
+        self._toggle.setArrowType(Qt.RightArrow)
 
         self._content = QWidget()
         self._content.setObjectName("content")
@@ -1869,11 +1870,13 @@ class CollapsibleSection(QWidget):
             pass
 
         if checked:
+            self._toggle.setArrowType(Qt.DownArrow)
             self._content.setVisible(True)
             start, end = 0, self._content.layout().sizeHint().height()
             self._content.setMaximumHeight(0)
             self._anim.finished.connect(lambda: self._content.setMaximumHeight(16777215))
         else:
+            self._toggle.setArrowType(Qt.RightArrow)
             start, end = self._content.height(), 0
             self._anim.finished.connect(lambda: self._content.setVisible(False))
 
@@ -1917,7 +1920,7 @@ class CastChartPage(QWidget):
 
         # --- Heading ---
         title_label = QLabel("Cast a New Horary Chart")
-        title_font = QFont("Arial", 28, QFont.DemiBold)
+        title_font = QFont("Roboto", 28, QFont.DemiBold)
         title_label.setFont(title_font)
         title_label.setAlignment(Qt.AlignCenter)
         main_layout.addWidget(title_label)
@@ -1932,7 +1935,7 @@ class CastChartPage(QWidget):
         # --- Horary Question ---
         self.question_edit = QTextEdit()
         self.question_edit.setPlaceholderText("Enter your specific, sincere question...")
-        self.question_edit.setFont(QFont("Arial", 16, QFont.Medium))
+        self.question_edit.setFont(QFont("Roboto", 16, QFont.Medium))
         self.question_edit.setMinimumHeight(120)
         self.question_edit.setStyleSheet("""
             QTextEdit {
@@ -1953,7 +1956,7 @@ class CastChartPage(QWidget):
         # --- Location Field ---
         self.location_edit = QLineEdit()
         self.location_edit.setPlaceholderText("📍 e.g., London, UK")
-        self.location_edit.setFont(QFont("Arial", 16, QFont.Medium))
+        self.location_edit.setFont(QFont("Roboto", 16, QFont.Medium))
         self.location_edit.setStyleSheet("""
             QLineEdit {
                 border: 1px solid #E0E0E0;
@@ -1973,7 +1976,7 @@ class CastChartPage(QWidget):
         # --- Time Field ---
         self.datetime_edit = QDateTimeEdit()
         self.datetime_edit.setDateTime(QDateTime.currentDateTime())
-        self.datetime_edit.setFont(QFont("Arial", 16, QFont.Medium))
+        self.datetime_edit.setFont(QFont("Roboto", 16, QFont.Medium))
         self.datetime_edit.setCalendarPopup(True)
         self.datetime_edit.setStyleSheet("""
             QDateTimeEdit {
@@ -1996,14 +1999,14 @@ class CastChartPage(QWidget):
 
         # --- Progress Label ---
         self.progress_label = QLabel()
-        self.progress_label.setFont(QFont("Arial", 14))
+        self.progress_label.setFont(QFont("Roboto", 14))
         self.progress_label.setAlignment(Qt.AlignCenter)
         self.progress_label.hide()
         main_layout.addWidget(self.progress_label)
 
         # --- Submit Button ---
         self.submit_button = QPushButton("⚡ Cast Chart")
-        self.submit_button.setFont(QFont("Arial", 18, QFont.DemiBold))
+        self.submit_button.setFont(QFont("Roboto", 18, QFont.DemiBold))
         self.submit_button.setCursor(Qt.PointingHandCursor)
         self.submit_button.setStyleSheet("""
             QPushButton {
@@ -2037,7 +2040,7 @@ class CastChartPage(QWidget):
         layout.setSpacing(8) # 8pt baseline grid
 
         label = QLabel(label_text)
-        label.setFont(QFont("Arial", 14, QFont.Normal))
+        label.setFont(QFont("Roboto", 14, QFont.Normal))
         
         layout.addWidget(label)
         layout.addWidget(field_widget)
@@ -2138,7 +2141,7 @@ class CastChartPage(QWidget):
 
         # Form title
         title_label = QLabel("⚡ Cast Enhanced Horary Chart")
-        title_label.setFont(QFont("Arial", 26, QFont.Bold))
+        title_label.setFont(QFont("Roboto", 26, QFont.Bold))
         title_label.setStyleSheet("color: #2c3e50; margin-bottom: 20px;")
         title_label.setAlignment(Qt.AlignCenter)
         main_layout.addWidget(title_label)
@@ -2279,7 +2282,7 @@ class CastChartPage(QWidget):
     def create_question_section(self) -> QWidget:
         """Create the question input section with full width"""
         section = QGroupBox("Horary Question *")
-        section.setFont(QFont("Arial", 16, QFont.Bold))
+        section.setFont(QFont("Roboto", 16, QFont.Bold))
         section.setStyleSheet(
             """
             QGroupBox {
@@ -2315,7 +2318,7 @@ class CastChartPage(QWidget):
                 border-radius: 8px;
                 padding: 15px;
                 font-size: 14px;
-                font-family: Arial;
+                font-family: Roboto;
                 background-color: white;
                 line-height: 1.4;
             }
@@ -2333,7 +2336,7 @@ class CastChartPage(QWidget):
     def create_location_section(self) -> QWidget:
         """Create the location input section with full width"""
         section = QGroupBox("Location *")
-        section.setFont(QFont("Arial", 16, QFont.Bold))
+        section.setFont(QFont("Roboto", 16, QFont.Bold))
         section.setStyleSheet(
             """
             QGroupBox {
@@ -2393,7 +2396,7 @@ class CastChartPage(QWidget):
     def create_time_section(self) -> QWidget:
         """Create the time options section"""
         section = QGroupBox("Chart Time")
-        section.setFont(QFont("Arial", 16, QFont.Bold))
+        section.setFont(QFont("Roboto", 16, QFont.Bold))
         section.setStyleSheet(
             """
             QGroupBox {
@@ -2421,11 +2424,11 @@ class CastChartPage(QWidget):
 
         self.current_time_radio = QRadioButton("Use current time (moment of asking)")
         self.current_time_radio.setChecked(True)
-        self.current_time_radio.setFont(QFont("Arial", 13))
+        self.current_time_radio.setFont(QFont("Roboto", 13))
         self.time_button_group.addButton(self.current_time_radio)
 
         self.custom_time_radio = QRadioButton("Specify custom time")
-        self.custom_time_radio.setFont(QFont("Arial", 13))
+        self.custom_time_radio.setFont(QFont("Roboto", 13))
         self.time_button_group.addButton(self.custom_time_radio)
 
         self.datetime_edit = QDateTimeEdit()
@@ -2463,7 +2466,7 @@ class CastChartPage(QWidget):
     def create_house_section(self) -> QWidget:
         """Create the house assignment section"""
         section = QGroupBox("House Assignment")
-        section.setFont(QFont("Arial", 16, QFont.Bold))
+        section.setFont(QFont("Roboto", 16, QFont.Bold))
         section.setStyleSheet(
             """
             QGroupBox {
@@ -2491,11 +2494,11 @@ class CastChartPage(QWidget):
 
         self.auto_house_radio = QRadioButton("Automatic (AI analyzes question)")
         self.auto_house_radio.setChecked(True)
-        self.auto_house_radio.setFont(QFont("Arial", 12))
+        self.auto_house_radio.setFont(QFont("Roboto", 12))
         self.house_button_group.addButton(self.auto_house_radio)
 
         self.manual_house_radio = QRadioButton("Manual house selection")
-        self.manual_house_radio.setFont(QFont("Arial", 12))
+        self.manual_house_radio.setFont(QFont("Roboto", 12))
         self.house_button_group.addButton(self.manual_house_radio)
 
         self.house_combo = QComboBox()
@@ -2546,8 +2549,8 @@ class CastChartPage(QWidget):
         section = CollapsibleSection("Advanced Options")
         section.setStyleSheet(
             """
-            QCheckBox {
-                font: bold 16px 'Arial';
+            QToolButton {
+                font: bold 16px 'Roboto';
                 margin-top: 15px;
                 padding-left: 5px;
             }
@@ -2580,7 +2583,7 @@ class CastChartPage(QWidget):
         ]
 
         for i, checkbox in enumerate(checkboxes):
-            checkbox.setFont(QFont("Arial", 12))
+            checkbox.setFont(QFont("Roboto", 12))
             checkbox.setStyleSheet("QCheckBox { margin: 8px 0; }")
             row = i // 2
             col = i % 2
@@ -2769,7 +2772,7 @@ class ChartDetailPage(QWidget):
         title_row = QHBoxLayout()
         
         self.title_label = QLabel("Chart Analysis")
-        self.title_label.setFont(QFont("Arial", 18, QFont.Bold))
+        self.title_label.setFont(QFont("Roboto", 18, QFont.Bold))
         self.title_label.setWordWrap(True)
         
         # Action buttons
@@ -2921,7 +2924,7 @@ class ChartDetailPage(QWidget):
                 border-radius: 6px;
                 padding: 16px;
                 background-color: #fafafa;
-                font-family: Arial;
+                font-family: Roboto;
                 line-height: 1.4;
             }
         """)
@@ -3105,7 +3108,7 @@ class ChartDetailPage(QWidget):
         
         # Header
         header_label = QLabel("Traditional Horary Considerations")
-        header_label.setFont(QFont("Arial", 16, QFont.Bold))
+        header_label.setFont(QFont("Roboto", 16, QFont.Bold))
         header_label.setStyleSheet("color: #2c3e50; margin-bottom: 12px;")
         self.considerations_layout.addWidget(header_label)
         
@@ -3130,7 +3133,7 @@ class ChartDetailPage(QWidget):
         header_layout = QHBoxLayout()
         
         title_label = QLabel("🌙 The Moon's Story")
-        title_label.setFont(QFont("Arial", 16, QFont.Bold))
+        title_label.setFont(QFont("Roboto", 16, QFont.Bold))
         
         # Moon story controls
         self.moon_period_combo = QComboBox()
@@ -3200,7 +3203,7 @@ This text editor supports rich formatting - use the right-click menu for options
                 border-radius: 6px;
                 padding: 12px;
                 background-color: #fafafa;
-                font-family: Arial;
+                font-family: Roboto;
                 font-size: 13px;
                 line-height: 1.4;
             }
@@ -3314,7 +3317,7 @@ This text editor supports rich formatting - use the right-click menu for options
         <html>
         <head>
             <style>
-                body {{ font-family: Arial, sans-serif; line-height: 1.6; }}
+                body {{ font-family: Roboto, sans-serif; line-height: 1.6; }}
                 h1 {{ color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }}
                 h2 {{ color: #34495e; margin-top: 25px; }}
                 h3 {{ color: #7f8c8d; }}
@@ -3405,7 +3408,7 @@ This text editor supports rich formatting - use the right-click menu for options
         for row, (planet_name, planet_data) in enumerate(planets.items()):
             # Planet name
             planet_item = QTableWidgetItem(planet_name)
-            planet_item.setFont(QFont("Arial", 10, QFont.Bold))
+            planet_item.setFont(QFont("Roboto", 10, QFont.Bold))
             self.dignities_table.setItem(row, 0, planet_item)
             
             # Sign
@@ -3422,7 +3425,7 @@ This text editor supports rich formatting - use the right-click menu for options
             dignity = planet_data.get('dignity_score', 0)
             dignity_text = f"{dignity:+d}"
             dignity_item = QTableWidgetItem(dignity_text)
-            dignity_item.setFont(QFont("Arial", 10, QFont.Bold))
+            dignity_item.setFont(QFont("Roboto", 10, QFont.Bold))
             
             # Color code dignity
             if dignity > 3:
@@ -3473,7 +3476,7 @@ This text editor supports rich formatting - use the right-click menu for options
             
             notes_text = ", ".join(notes) if notes else "-"
             notes_item = QTableWidgetItem(notes_text)
-            notes_item.setFont(QFont("Arial", 9))
+            notes_item.setFont(QFont("Roboto", 9))
             self.dignities_table.setItem(row, 5, notes_item)
         
         # Adjust column widths
@@ -3510,7 +3513,7 @@ This text editor supports rich formatting - use the right-click menu for options
             # Planets
             planets_text = f"{aspect['planet1']} - {aspect['planet2']}"
             planets_item = QTableWidgetItem(planets_text)
-            planets_item.setFont(QFont("Arial", 10, QFont.Bold))
+            planets_item.setFont(QFont("Roboto", 10, QFont.Bold))
             self.aspects_table.setItem(row, 0, planets_item)
             
             # Aspect type
@@ -3528,7 +3531,7 @@ This text editor supports rich formatting - use the right-click menu for options
             
             color = aspect_colors.get(aspect_type, '#333333')
             aspect_item.setForeground(QColor(color))
-            aspect_item.setFont(QFont("Arial", 10, QFont.Bold))
+            aspect_item.setFont(QFont("Roboto", 10, QFont.Bold))
             
             self.aspects_table.setItem(row, 1, aspect_item)
             
@@ -3718,13 +3721,13 @@ This text editor supports rich formatting - use the right-click menu for options
         header_layout = QHBoxLayout()
         
         icon_label = QLabel(icon)
-        icon_label.setFont(QFont("Arial", 20))
+        icon_label.setFont(QFont("Roboto", 20))
         
         title_label = QLabel(title)
-        title_label.setFont(QFont("Arial", 14, QFont.Bold))
+        title_label.setFont(QFont("Roboto", 14, QFont.Bold))
         
         status_label = QLabel("PASSED" if passed else "FAILED")
-        status_label.setFont(QFont("Arial", 10, QFont.Bold))
+        status_label.setFont(QFont("Roboto", 10, QFont.Bold))
         status_label.setStyleSheet(f"color: {'#155724' if passed else '#721c24'};")
         
         header_layout.addWidget(icon_label)
@@ -3775,7 +3778,7 @@ This text editor supports rich formatting - use the right-click menu for options
         # Current aspects section
         if moon_aspects:
             current_label = QLabel("🌙 Current Moon Aspects")
-            current_label.setFont(QFont("Arial", 14, QFont.Bold))
+            current_label.setFont(QFont("Roboto", 14, QFont.Bold))
             current_label.setStyleSheet("margin: 16px 0 8px 0; color: #2c3e50;")
             self.moon_content_layout.addWidget(current_label)
             
@@ -3821,7 +3824,7 @@ This text editor supports rich formatting - use the right-click menu for options
         
         # Planet and aspect
         planet_aspect_label = QLabel(f"Moon {aspect_type} {planet}")
-        planet_aspect_label.setFont(QFont("Arial", 12, QFont.Bold))
+        planet_aspect_label.setFont(QFont("Roboto", 12, QFont.Bold))
         
         # Orb
         orb_label = QLabel(f"{orb:.2f}°")
@@ -3939,7 +3942,7 @@ This text editor supports rich formatting - use the right-click menu for options
         # Title
         title = f"Moon {aspect['aspect']} {aspect['planet']}"
         title_label = QLabel(title)
-        title_label.setFont(QFont("Arial", 12, QFont.Bold))
+        title_label.setFont(QFont("Roboto", 12, QFont.Bold))
         
         # Details
         details_parts = [
