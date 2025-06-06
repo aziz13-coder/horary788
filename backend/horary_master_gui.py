@@ -2668,6 +2668,12 @@ class CastChartPage(QWidget):
             house_index = self.house_combo.currentIndex() + 1
             settings["manual_house"] = house_index
 
+        # Advanced override flags
+        settings["ignore_radicality"] = self.ignore_radicality_check.isChecked()
+        settings["ignore_void_moon"] = self.ignore_void_moon_check.isChecked()
+        settings["ignore_combustion"] = self.ignore_combustion_check.isChecked()
+        settings["ignore_saturn_7th"] = self.ignore_saturn_7th_check.isChecked()
+
         # Disable submit button and show progress
         self.submit_button.setEnabled(False)
         self.submit_button.setText("Calculating...")
