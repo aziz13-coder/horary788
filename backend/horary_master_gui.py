@@ -2139,12 +2139,7 @@ class CastChartPage(QWidget):
         # Use tighter spacing for better vertical rhythm
         main_layout.setSpacing(16)
 
-        # Form title
-        title_label = QLabel("⚡ Cast Enhanced Horary Chart")
-        title_label.setFont(QFont("Roboto", 26, QFont.Bold))
-        title_label.setStyleSheet("color: #2c3e50; margin-bottom: 20px;")
-        title_label.setAlignment(Qt.AlignCenter)
-        main_layout.addWidget(title_label)
+        # Form title removed per UI simplification
 
         # Show error banner only when engine is unavailable
         if not HORARY_ENGINE_AVAILABLE:
@@ -2231,6 +2226,7 @@ class CastChartPage(QWidget):
 
         # Submit button - full width with better styling
         self.submit_button = QPushButton("⚡ Cast Enhanced Horary Chart")
+        self.submit_button.setFixedWidth(260)
         self.submit_button.setStyleSheet(
             """
             QPushButton {
@@ -2238,12 +2234,12 @@ class CastChartPage(QWidget):
                     stop:0 #4CAF50, stop:1 #45a049);
                 color: white;
                 border: none;
-                padding: 25px 50px;
+                padding: 15px 30px;
                 border-radius: 12px;
-                font-size: 20px;
+                font-size: 16px;
                 font-weight: bold;
-                margin-top: 30px;
-                min-height: 60px;
+                margin-top: 20px;
+                min-height: 40px;
             }
             QPushButton:hover {
                 background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
@@ -2257,7 +2253,7 @@ class CastChartPage(QWidget):
             """
         )
         self.submit_button.clicked.connect(self.cast_chart)
-        form_layout.addWidget(self.submit_button)
+        form_layout.addWidget(self.submit_button, alignment=Qt.AlignCenter)
 
         # Tab order following visual flow
         self.setTabOrder(self.question_edit, self.location_edit)
@@ -2281,8 +2277,8 @@ class CastChartPage(QWidget):
 
     def create_question_section(self) -> QWidget:
         """Create the question input section with full width"""
-        section = QGroupBox("Horary Question *")
-        section.setFont(QFont("Roboto", 16, QFont.Bold))
+        section = QGroupBox("Horary Question")
+        section.setFont(QFont("Roboto", 14, QFont.Bold))
         section.setStyleSheet(
             """
             QGroupBox {
@@ -2335,8 +2331,8 @@ class CastChartPage(QWidget):
 
     def create_location_section(self) -> QWidget:
         """Create the location input section with full width"""
-        section = QGroupBox("Location *")
-        section.setFont(QFont("Roboto", 16, QFont.Bold))
+        section = QGroupBox("Location")
+        section.setFont(QFont("Roboto", 14, QFont.Bold))
         section.setStyleSheet(
             """
             QGroupBox {
@@ -2396,7 +2392,7 @@ class CastChartPage(QWidget):
     def create_time_section(self) -> QWidget:
         """Create the time options section"""
         section = QGroupBox("Chart Time")
-        section.setFont(QFont("Roboto", 16, QFont.Bold))
+        section.setFont(QFont("Roboto", 14, QFont.Bold))
         section.setStyleSheet(
             """
             QGroupBox {
@@ -2465,8 +2461,8 @@ class CastChartPage(QWidget):
 
     def create_house_section(self) -> QWidget:
         """Create the house assignment section"""
-        section = QGroupBox("House Assignment")
-        section.setFont(QFont("Roboto", 16, QFont.Bold))
+        section = QGroupBox("")
+        section.setFont(QFont("Roboto", 14, QFont.Bold))
         section.setStyleSheet(
             """
             QGroupBox {
