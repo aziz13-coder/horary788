@@ -1942,10 +1942,10 @@ class CastChartPage(QWidget):
         self.question_edit.setMinimumHeight(120)
         self.question_edit.setStyleSheet("""
             QTextEdit {
-                border: 1px solid #E0E0E0;
-                border-radius: 8px;
+                border: 1px solid #cccccc;
+                border-radius: 6px;
                 padding: 12px;
-                background-color: #FDFDFD;
+                background-color: white;
             }
             QTextEdit:focus {
                 border-color: #4CAF50;
@@ -1958,14 +1958,14 @@ class CastChartPage(QWidget):
 
         # --- Location Field ---
         self.location_edit = QLineEdit()
-        self.location_edit.setPlaceholderText("📍 e.g., London, UK")
+        self.location_edit.setPlaceholderText("📍 Enter location (e.g., London, UK)")
         self.location_edit.setFont(QFont("Roboto", 16, QFont.Medium))
         self.location_edit.setStyleSheet("""
             QLineEdit {
-                border: 1px solid #E0E0E0;
-                border-radius: 8px;
-                padding: 12px;
-                background-color: #FDFDFD;
+                border: 1px solid #cccccc;
+                border-radius: 6px;
+                padding: 10px;
+                background-color: white;
             }
             QLineEdit:focus {
                 border-color: #4CAF50;
@@ -1983,10 +1983,10 @@ class CastChartPage(QWidget):
         self.datetime_edit.setCalendarPopup(True)
         self.datetime_edit.setStyleSheet("""
             QDateTimeEdit {
-                border: 1px solid #E0E0E0;
-                border-radius: 8px;
-                padding: 12px;
-                background-color: #FDFDFD;
+                border: 1px solid #cccccc;
+                border-radius: 6px;
+                padding: 10px;
+                background-color: #f8f9fa;
             }
             QDateTimeEdit::up-button, QDateTimeEdit::down-button {
                 width: 24px;
@@ -2200,23 +2200,26 @@ class CastChartPage(QWidget):
 
         # Question field - spans both columns
         question_section = self.create_question_section()
-        sections_layout.addWidget(question_section, 0, 0, 1, 2)  # Row 0, columns 0-1
+        sections_layout.addWidget(question_section, 0, 0, 1, 2)
+        sections_layout.addWidget(self.create_separator(), 1, 0, 1, 2)
 
         # Location field - spans both columns
         location_section = self.create_location_section()
-        sections_layout.addWidget(location_section, 1, 0, 1, 2)  # Row 1, columns 0-1
+        sections_layout.addWidget(location_section, 2, 0, 1, 2)
+        sections_layout.addWidget(self.create_separator(), 3, 0, 1, 2)
 
         # Time options - left column
         time_section = self.create_time_section()
-        sections_layout.addWidget(time_section, 2, 0)  # Row 2, column 0
+        sections_layout.addWidget(time_section, 4, 0)
 
         # House assignment - right column
         house_section = self.create_house_section()
-        sections_layout.addWidget(house_section, 2, 1)  # Row 2, column 1
+        sections_layout.addWidget(house_section, 4, 1)
+        sections_layout.addWidget(self.create_separator(), 5, 0, 1, 2)
 
         # Advanced options - spans both columns
         advanced_section = self.create_advanced_section()
-        sections_layout.addWidget(advanced_section, 3, 0, 1, 2)  # Row 3, columns 0-1
+        sections_layout.addWidget(advanced_section, 6, 0, 1, 2)
 
         form_layout.addLayout(sections_layout)
 
@@ -2298,17 +2301,17 @@ class CastChartPage(QWidget):
         section.setStyleSheet(
             """
             QGroupBox {
-                border: 2px solid #e0e0e0;
-                border-radius: 10px;
+                border: 1px solid #dddddd;
+                border-radius: 8px;
                 margin-top: 15px;
-                padding-top: 15px;
+                padding-top: 10px;
                 font-weight: bold;
-                background-color: #fafafa;
+                background-color: white;
             }
             QGroupBox::title {
                 subcontrol-origin: margin;
                 left: 15px;
-                padding: 0 10px 0 10px;
+                padding: 0 8px;
                 background-color: white;
                 color: #007fff;
             }
@@ -2327,9 +2330,9 @@ class CastChartPage(QWidget):
         self.question_edit.setStyleSheet(
             """
             QTextEdit {
-                border: 2px solid #e0e0e0;
-                border-radius: 8px;
-                padding: 15px;
+                border: 1px solid #cccccc;
+                border-radius: 6px;
+                padding: 12px;
                 font-size: 14px;
                 font-family: Roboto;
                 background-color: white;
@@ -2357,17 +2360,17 @@ class CastChartPage(QWidget):
         section.setStyleSheet(
             """
             QGroupBox {
-                border: 2px solid #e0e0e0;
-                border-radius: 10px;
+                border: 1px solid #dddddd;
+                border-radius: 8px;
                 margin-top: 15px;
-                padding-top: 15px;
+                padding-top: 10px;
                 font-weight: bold;
-                background-color: #fafafa;
+                background-color: white;
             }
             QGroupBox::title {
                 subcontrol-origin: margin;
                 left: 15px;
-                padding: 0 10px 0 10px;
+                padding: 0 8px;
                 background-color: white;
                 color: #007fff;
             }
@@ -2379,17 +2382,17 @@ class CastChartPage(QWidget):
 
         self.location_edit = QLineEdit()
         self.location_edit.setPlaceholderText(
-            "Enter location (e.g., London, England or New York, NY)"
+            "📍 Enter location (e.g., London, UK)"
         )
         self.location_edit.setStyleSheet(
             """
             QLineEdit {
-                border: 2px solid #e0e0e0;
-                border-radius: 8px;
-                padding: 15px;
+                border: 1px solid #cccccc;
+                border-radius: 6px;
+                padding: 10px;
                 font-size: 14px;
                 background-color: white;
-                min-height: 20px;
+                min-height: 24px;
             }
             QLineEdit::placeholder {
                 color: #6b7280;
@@ -2417,22 +2420,22 @@ class CastChartPage(QWidget):
 
     def create_time_section(self) -> QWidget:
         """Create the time options section"""
-        section = QGroupBox("Chart Time")
+        section = QGroupBox("⏰ Chart Time")
         section.setFont(QFont("Roboto", 14, QFont.Bold))
         section.setStyleSheet(
             """
             QGroupBox {
-                border: 2px solid #e0e0e0;
-                border-radius: 10px;
+                border: 1px solid #dddddd;
+                border-radius: 8px;
                 margin-top: 15px;
-                padding-top: 15px;
+                padding-top: 10px;
                 font-weight: bold;
-                background-color: #fafafa;
+                background-color: white;
             }
             QGroupBox::title {
                 subcontrol-origin: margin;
                 left: 15px;
-                padding: 0 10px 0 10px;
+                padding: 0 8px;
                 background-color: white;
                 color: #007fff;
             }
@@ -2465,12 +2468,12 @@ class CastChartPage(QWidget):
         self.datetime_edit.setStyleSheet(
             """
             QDateTimeEdit {
-                padding: 12px 15px;
+                padding: 10px 12px;
                 font-size: 13px;
-                border: 2px solid #e0e0e0;
+                border: 1px solid #cccccc;
                 border-radius: 6px;
                 background-color: #f8f9fa;
-                min-height: 20px;
+                min-height: 24px;
             }
             QDateTimeEdit:enabled {
                 background-color: white;
@@ -2495,17 +2498,17 @@ class CastChartPage(QWidget):
         section.setStyleSheet(
             """
             QGroupBox {
-                border: 2px solid #e0e0e0;
-                border-radius: 10px;
+                border: 1px solid #dddddd;
+                border-radius: 8px;
                 margin-top: 15px;
-                padding-top: 15px;
+                padding-top: 10px;
                 font-weight: bold;
-                background-color: #fafafa;
+                background-color: white;
             }
             QGroupBox::title {
                 subcontrol-origin: margin;
                 left: 15px;
-                padding: 0 10px 0 10px;
+                padding: 0 8px;
                 background-color: white;
                 color: #007fff;
             }
@@ -2549,12 +2552,12 @@ class CastChartPage(QWidget):
         self.house_combo.setStyleSheet(
             """
             QComboBox {
-                padding: 12px 15px;
+                padding: 10px 12px;
                 font-size: 12px;
-                border: 2px solid #e0e0e0;
+                border: 1px solid #cccccc;
                 border-radius: 6px;
                 background-color: #f8f9fa;
-                min-height: 20px;
+                min-height: 24px;
             }
             QComboBox:enabled {
                 background-color: white;
@@ -2583,9 +2586,9 @@ class CastChartPage(QWidget):
                 padding-left: 5px;
             }
             QWidget#content {
-                border: 2px solid #e0e0e0;
-                border-radius: 10px;
-                background-color: #fafafa;
+                border: 1px solid #dddddd;
+                border-radius: 8px;
+                background-color: white;
                 margin-top: 5px;
             }
             """
